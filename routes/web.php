@@ -15,21 +15,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    var_dump(DB::table('products')
-        ->where('product_code','106259')
-        ->select('product_code', 'description')
-        ->get());
-});
 
 Auth::routes();
 
 // Dashboard Route
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// Admin => Import Route
-Route::get('/admin/import', [App\Http\Controllers\Admin\ImportController::class, 'index'])->name('admin.import.index');
-Route::post('/admin/import', [App\Http\Controllers\Admin\ImportController::class, 'import'])->name('admin.import.store');
+Route::group(['middleware' => ['check.admin']], function(){
+    // Admin => Import Route
+    Route::get('/admin/import', [App\Http\Controllers\Admin\ImportController::class, 'index'])->name('admin.import.index');
+    Route::post('/admin/import', [App\Http\Controllers\Admin\ImportController::class, 'import'])->name('admin.import.store');
+});
 
 // Products Route
 Route::get('/produtos', [App\Http\Controllers\ProductController::class, 'index'])->name('product.index');
