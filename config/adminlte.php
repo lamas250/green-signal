@@ -247,11 +247,11 @@ return [
                 ],
             ],
         ],
-        [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
-        ],
+        // [
+        //     'text' => 'profile',
+        //     'url'  => 'admin/settings',
+        //     'icon' => 'fas fa-fw fa-user',
+        // ],
         ['header' => 'Menu'],
         [
             'text' => 'Produtos',
